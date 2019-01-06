@@ -1,1 +1,1 @@
-export BACKUP_PATHS="/opt /etc /var/named"
+export BACKUP_PATHS="/opt /etc /var/named /var/www"
