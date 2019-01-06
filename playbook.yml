@@ -1,0 +1,19 @@
+---
+
+- name: Restic Playbook
+  hosts: 127.0.0.1
+  connection: local
+  become: yes
+  tasks:
+
+  - name: Add 4AM backup cron every day
+    cron:
+      name: backup
+      minute: "0"
+      hour: "4"
+      job: "bash /root/restic_backups/restic_backup.sh > /var/log/backup.log 2>&1"
+
+  - git:
+      repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
+      dest: /root/restic_backups
+      update: yes
