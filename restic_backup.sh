@@ -1,12 +1,12 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# What to backup, and what to not
+#  
 BACKUP_EXCLUDES="--exclude-file backup_exclude"
 TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
 BACKUP_TAG1=`hostname -s`
 BACKUP_TAG2=`hostname -s`-${TIMESTAMP}
 
-# How many backups to keep.
+# 
 KEEP_LAST=4
 RETENTION_HOURS=4
 RETENTION_DAYS=30
@@ -14,7 +14,7 @@ RETENTION_WEEKS=12
 RETENTION_MONTHS=12
 RETENTION_YEARS=3
 
-# Set all environment variables
+#
 source /root/.restic_env 
 source backup_include
 
@@ -26,7 +26,7 @@ source backup_include
     $BACKUP_EXCLUDES \
     $BACKUP_PATHS
 
-# Dereference old backups.
+# 
 
 ./restic forget \
     --verbose \
