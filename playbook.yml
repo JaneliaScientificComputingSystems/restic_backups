@@ -16,4 +16,3 @@
   - git:
       repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
       dest: /root/restic_backups
-      update: yes
