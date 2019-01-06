@@ -22,6 +22,7 @@ source /root/.restic_env
 source backup_include
 
 cd $TOPDIR
+git pull
 
 ./restic backup \
     --verbose \
