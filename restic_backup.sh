@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#
+TOPDIR="/root/restic_backups"
+
 #  
 BACKUP_EXCLUDES="--exclude-file backup_exclude"
 TIMESTAMP=`date "+%Y%m%d-%H%M%S"`
@@ -17,6 +20,8 @@ RETENTION_YEARS=3
 #
 source /root/.restic_env 
 source backup_include
+
+cd $TOPDIR
 
 ./restic backup \
     --verbose \
