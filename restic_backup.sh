@@ -18,10 +18,10 @@ RETENTION_MONTHS=12
 RETENTION_YEARS=3
 
 #
+cd $TOPDIR
 source /root/.restic_env 
 source backup_include
 
-cd $TOPDIR
 git pull
 
 ./restic backup \
