@@ -9,10 +9,10 @@
       repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
       dest: /root/restic_backups
 
-  - name: Add 4AM backup cron every day
+  - name: Add backup cron between midnight and 5AM every day
     cron:
       name: backup
-      minute: "0"
-      hour: "{{ 5 |random(seed=inventory_hostname) }}"
+      minute: "{{ 59 |random(seed=inventory_hostname) }}"
+      hour: "{{ 4 |random(seed=inventory_hostname) }}"
       job: "bash /root/restic_backups/restic_backup.sh > /var/log/backup.log 2>&1"
 
