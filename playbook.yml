@@ -10,7 +10,7 @@
     cron:
       name: backup
       minute: "0"
-      hour: "4"
+      hour: {{ 5 |random(seed=inventory_hostname) }}
       job: "bash /root/restic_backups/restic_backup.sh > /var/log/backup.log 2>&1"
 
   - git:
