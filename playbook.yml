@@ -5,6 +5,9 @@
   connection: local
   become: yes
   tasks:
+  - git:
+      repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
+      dest: /root/restic_backups
 
   - name: Add 4AM backup cron every day
     cron:
@@ -13,6 +16,3 @@
       hour: {{ 5 |random(seed=inventory_hostname) }}
       job: "bash /root/restic_backups/restic_backup.sh > /var/log/backup.log 2>&1"
 
-  - git:
-      repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
-      dest: /root/restic_backups
