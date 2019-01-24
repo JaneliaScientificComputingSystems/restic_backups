@@ -4,15 +4,21 @@
   hosts: 127.0.0.1
   connection: local
   become: yes
-  tasks:
-  - git:
+  tasks:  
+  - set_fact:
+      h: "{{ 4 | random(start=0) }}"
+    run_once: yes
+  - set_fact:
+      m: "{{ 59 | random(start=0) }}"
+    run_once: yes
+  - git:  
       repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
       dest: /root/restic_backups
 
   - name: Add backup cron between midnight and 5AM every day
-    cron:
+    cron:   
       name: backup
-      minute: "{{ 59 |random(seed=inventory_hostname) }}"
-      hour: "{{ 4 |random(seed=inventory_hostname) }}"
+      minute: "{{ m }}"
+      hour: "{{ h }}"
       job: "bash /root/restic_backups/restic_backup.sh > /var/log/backup.log 2>&1"
 
