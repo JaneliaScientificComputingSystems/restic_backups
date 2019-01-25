@@ -18,7 +18,7 @@ RETENTION_MONTHS=12
 RETENTION_YEARS=3
 
 #
-cd $TOPDIR
+cd $TOPDIR 
 source /root/.restic_env 
 source backup_include
 
@@ -44,4 +44,3 @@ git pull
     --keep-monthly $RETENTION_MONTHS \
     --keep-yearly $RETENTION_YEARS \
     --prune
-
