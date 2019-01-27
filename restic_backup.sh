@@ -42,5 +42,4 @@ git pull
     --keep-daily $RETENTION_DAYS \
     --keep-weekly $RETENTION_WEEKS \
     --keep-monthly $RETENTION_MONTHS \
-    --keep-yearly $RETENTION_YEARS \
-    --prune
+    --keep-yearly $RETENTION_YEARS 
