@@ -7,10 +7,8 @@
   tasks:  
   - set_fact:
       h: "{{ 4 | random(start=0) }}"
-    run_once: yes
   - set_fact:
       m: "{{ 59 | random(start=0) }}"
-    run_once: yes
   - git:  
       repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
       dest: /root/restic_backups
