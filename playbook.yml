@@ -1,23 +1,23 @@
----
-
 - name: Restic Playbook
-  hosts: 127.0.0.1
-  connection: local
-  become: yes
-  tasks:  
-  - set_fact:
-      h: "{{ 4 | random(start=0) }}"
-  - set_fact:
-      m: "{{ 59 | random(start=0) }}"
-  - git:  
-      repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
-      dest: /root/restic_backups
+  hosts: "{{ host | default('localhost') }}"
+  remote_user: "{{ user | default('root') }}"
+  
+  tasks:
+    - name: Generate random hour and minute for cron job
+      ansible.builtin.set_fact:
+        h: "{{ 4 | random(start=0) }}"
+        m: "{{ 59 | random(start=0) }}"
 
-  - name: Add backup cron between midnight and 5AM every day
-    cron:   
-      name: backup
-      minute: "{{ m }}"
-      hour: "{{ h }}"
-      job: "bash /root/restic_backups/restic_backup.sh > /var/log/backup.log 2>&1"
-      state: present 
+    - name: Clone restic backups repository
+      ansible.builtin.git:
+        repo: 'https://github.com/JaneliaScientificComputingSystems/restic_backups'
+        dest: /root/restic_backups
+        update: yes
 
+    - name: Add backup cron between midnight and 5AM every day
+      ansible.builtin.cron:
+        name: "backup"
+        minute: "{{ m }}"
+        hour: "{{ h }}"
+        job: "bash /root/restic_backups/restic_backup.sh > /var/log/backup.log 2>&1"
+        state: present
