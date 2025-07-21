@@ -1,0 +1,19 @@
+- name: Remove restic backup setup
+  hosts: "{{ host | default('localhost') }}"
+  remote_user: "{{ user | default('root') }}"
+  tasks:
+    - name: Remove /root/restic_backups directory
+      file:
+        path: /root/restic_backups
+        state: absent
+
+    - name: Remove /root/.restic_env file
+      file:
+        path: /root/.restic_env
+        state: absent
+
+    - name: Remove ansible "backup" cronjob
+      cron:
+        name: "backup"
+        state: absent
+        user: root 
